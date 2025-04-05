@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes.dynamic_routes import router
+from .routes.dynamic_routes import router
 from fastapi_mcp import add_mcp_server
 
 app = FastAPI()
