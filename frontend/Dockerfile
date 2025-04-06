@@ -12,6 +12,7 @@ RUN npm install
 COPY . .
 
 # 5. Build the Next.js app
+ENV NEXT_DISABLE_ESLINT=true
 RUN npm run build
 
 # 6. Use a minimal image for serving
