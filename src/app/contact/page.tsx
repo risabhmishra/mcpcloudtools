@@ -73,7 +73,7 @@ export default function ContactPage() {
           
           <div className="space-y-4">
             <div>
-              <h3 className="font-medium">Risabh Kumar</h3>
+              <h3 className="font-medium">Risabh Mishra</h3>
               <a 
                 href="mailto:risabh@mcpcloudtools.com" 
                 className="text-primary hover:underline flex items-center"
