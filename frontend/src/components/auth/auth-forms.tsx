@@ -191,15 +191,6 @@ function LoginForm({ setActiveTab }: { setActiveTab: (tab: string) => void }) {
             Sign up
           </Button>
         </div>
-        <div className="text-sm text-foreground/80 dark:text-foreground/80 text-center">
-          <span className="font-medium">Demo credentials:</span>
-          <div className="mt-1">
-            <code className="px-1 py-0.5 bg-muted text-foreground rounded text-xs">admin@example.com / admin123</code>
-          </div>
-          <div className="mt-1">
-            <code className="px-1 py-0.5 bg-muted text-foreground rounded text-xs">user@example.com / user123</code>
-          </div>
-        </div>
       </CardFooter>
     </Card>
   );
