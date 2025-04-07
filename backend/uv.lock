@@ -118,6 +118,15 @@ wheels = [
 ]
 
 [[package]]
+name = "curlconverter"
+version = "1.0.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/7f/ea/807661af581b7b3b4b6b50d9157f73dfa4efe62607f04eb3db1aeef6121b/curlconverter-1.0.1.tar.gz", hash = "sha256:5fab370db6e6216513338eecc9e211dbc04e48432d201e69b070d265d4b6426e", size = 1466 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4c/de/bbdff74bec22f7db6f586b3baa8dc7e6938fb289a5eacf1d4e210d4af8cb/curlconverter-1.0.1-py3-none-any.whl", hash = "sha256:44df2bab14bf6460352d421155fdf73339564b7972bd32e3d7a38af25db4b6ea", size = 1837 },
+]
+
+[[package]]
 name = "dnspython"
 version = "2.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -416,6 +425,7 @@ name = "mcpcloudtools"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "curlconverter" },
     { name = "fastapi", extra = ["standard"] },
     { name = "fastapi-mcp" },
     { name = "httpx" },
@@ -425,6 +435,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "curlconverter", specifier = ">=1.0.1" },
     { name = "fastapi", extras = ["standard"], specifier = ">=0.115.12" },
     { name = "fastapi-mcp", specifier = ">=0.1.4" },
     { name = "httpx", specifier = ">=0.28.1" },
