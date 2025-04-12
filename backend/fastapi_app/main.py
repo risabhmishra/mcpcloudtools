@@ -1,6 +1,6 @@
-from fastapi import FastAPI
-from starlette.routing import Host
+from fastapi import FastAPI, Request
 from mcp.server.fastmcp import FastMCP
+from mcp.server.sse import SseServerTransport
 
 import logging
 
@@ -9,14 +9,17 @@ from fastapi_app.tool_input import ToolInput
 
 logger = logging.getLogger(__name__)
 
-mcp = FastMCP("MCPCloudTools")
 app = FastAPI()
-
-# Register routers
-app.routes.append(Host('mcp.acme.corp', app=mcp.sse_app()))
+mcp = FastMCP("MCPCloudTools")
+transport = SseServerTransport("/messages/")
 
 # In-memory registry (optional)
 registered_tools = {}
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
 
 
 @mcp.tool()
@@ -57,3 +60,22 @@ async def list_registered_tools():
             for name, meta in registered_tools.items()
         ]
     }
+
+
+@app.get("/sse/")
+async def handle_sse(request: Request):
+    async with transport.connect_sse(
+            request.scope, request.receive, request._send
+    ) as streams:
+        await mcp._mcp_server.run(
+            streams[0], streams[1], mcp._mcp_server.create_initialization_options()
+        )
+
+
+@app.post("/messages/")
+async def handle_post_message(request: Request):
+    # Correctly passing receive and send
+    receive = request.receive
+    send = request._send  # This accesses the `send` method from the request object
+    return await transport.handle_post_message(request.scope, receive, send)
+
