@@ -208,7 +208,7 @@ export default function MCPCloudToolsPOC() {
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">MCPCloudTools</h1>
         <p className="text-xl text-muted-foreground mb-3">
-          A Tools-as-a-Service platform for <span className="font-bold text-primary">agentic AI</span> built on the Model Context Protocol
+          A Tools-as-a-Service platform for <span className="font-bold text-primary">Agentic AI</span> built on the Model Context Protocol
         </p>
         <div className="max-w-2xl mx-auto border-l-4 border-primary pl-4 py-2 bg-primary/5 text-left">
           <p className="text-base text-muted-foreground">
@@ -570,8 +570,9 @@ export default function MCPCloudToolsPOC() {
       </div>
       
       <footer className="mt-8 text-center text-sm text-muted-foreground">
-        <p>MCPCloudTools - A Tools-as-a-Service platform for agentic AI</p>
+        <p>MCPCloudTools - A Tools-as-a-Service platform for Agentic AI</p>
         <p className="mt-1">© 2025 MCPCloudTools</p>
+        <p className="mt-2">Contact us: <a href="mailto:risabh@mcpcloudtools.com" className="text-primary hover:underline">risabh@mcpcloudtools.com</a> | <a href="mailto:nischay@cloudtools.com" className="text-primary hover:underline">nischay@cloudtools.com</a></p>
       </footer>
       
       <Toaster />
