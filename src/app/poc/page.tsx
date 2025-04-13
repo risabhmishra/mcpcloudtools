@@ -572,7 +572,7 @@ export default function MCPCloudToolsPOC() {
       <footer className="mt-8 text-center text-sm text-muted-foreground">
         <p>MCPCloudTools - A Tools-as-a-Service platform for Agentic AI</p>
         <p className="mt-1">© 2025 MCPCloudTools</p>
-        <p className="mt-2">Contact us: <a href="mailto:risabh@mcpcloudtools.com" className="text-primary hover:underline">risabh@mcpcloudtools.com</a> | <a href="mailto:nischay@cloudtools.com" className="text-primary hover:underline">nischay@cloudtools.com</a></p>
+        <p className="mt-2">Contact us: <a href="mailto:risabh@mcpcloudtools.com" className="text-primary hover:underline">risabh@mcpcloudtools.com</a> | <a href="mailto:nischay@mcpcloudtools.com" className="text-primary hover:underline">nischay@mcpcloudtools.com</a></p>
       </footer>
       
       <Toaster />
