@@ -1,6 +1,9 @@
+import os
+
 from fastapi import FastAPI, Request
 from mcp.server.fastmcp import FastMCP
 from mcp.server.sse import SseServerTransport
+from fastapi.middleware.cors import CORSMiddleware
 
 import logging
 
@@ -10,6 +13,24 @@ from fastapi_app.tool_input import ToolInput
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+
+# from fastapi import FastAPI, Request
+# from fastapi.templating import Jinja2Templates
+# from fastapi.responses import HTMLResponse
+
+# current_dir = os.path.dirname(__file__)
+# templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
+
+
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 mcp = FastMCP("MCPCloudTools")
 transport = SseServerTransport("/messages/")
 
@@ -21,6 +42,10 @@ registered_tools = {}
 def read_root():
     return {"Hello": "World"}
 
+
+# @app.get("/", response_class=HTMLResponse)
+# async def read_index(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request})
 
 @mcp.tool()
 def calculate_bmi(weight_kg: float, height_m: float) -> float:
@@ -78,4 +103,3 @@ async def handle_post_message(request: Request):
     receive = request.receive
     send = request._send  # This accesses the `send` method from the request object
     return await transport.handle_post_message(request.scope, receive, send)
-
