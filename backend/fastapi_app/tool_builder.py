@@ -33,5 +33,5 @@ class ToolBuilder:
             "method": self.method,
             "url": self.url,
             "headers": self.headers,
-            "data": self.data
+            "data": self.data,
         }

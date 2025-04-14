@@ -1,5 +1,3 @@
-import os
-
 from fastapi import FastAPI, Request
 from mcp.server.fastmcp import FastMCP
 from mcp.server.sse import SseServerTransport
@@ -12,16 +10,7 @@ from fastapi_app.tool_input import ToolInput
 
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
-
-# from fastapi import FastAPI, Request
-# from fastapi.templating import Jinja2Templates
-# from fastapi.responses import HTMLResponse
-
-# current_dir = os.path.dirname(__file__)
-# templates = Jinja2Templates(directory=os.path.join(current_dir, "templates"))
-
-
+app = FastAPI(root_path="/api")
 
 # Configure CORS
 app.add_middleware(
@@ -47,10 +36,11 @@ def read_root():
 # async def read_index(request: Request):
 #     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @mcp.tool()
 def calculate_bmi(weight_kg: float, height_m: float) -> float:
     """Calculate BMI given weight in kg and height in meters"""
-    return weight_kg / (height_m ** 2)
+    return weight_kg / (height_m**2)
 
 
 @app.post("/register_tool")
@@ -64,7 +54,7 @@ async def register_tool(req: ToolInput):
 
         return {
             "message": f"Tool `{req.tool_name}` registered successfully!",
-            "metadata": meta
+            "metadata": meta,
         }
 
     except Exception as e:
@@ -78,26 +68,22 @@ async def list_registered_tools():
 
     return {
         "tools": [
-            {
-                "name": name,
-                "details": meta
-            }
-            for name, meta in registered_tools.items()
+            {"name": name, "details": meta} for name, meta in registered_tools.items()
         ]
     }
 
 
-@app.get("/sse/")
+@app.get("/sse")
 async def handle_sse(request: Request):
     async with transport.connect_sse(
-            request.scope, request.receive, request._send
+        request.scope, request.receive, request._send
     ) as streams:
         await mcp._mcp_server.run(
             streams[0], streams[1], mcp._mcp_server.create_initialization_options()
         )
 
 
-@app.post("/messages/")
+@app.post("/messages")
 async def handle_post_message(request: Request):
     # Correctly passing receive and send
     receive = request.receive
