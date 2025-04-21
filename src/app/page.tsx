@@ -457,10 +457,12 @@ export default function MCPCloudToolsPOC() {
                           size="sm"
                           onClick={() => {
                             const config = JSON.stringify({
-                              tool_name: tool.name,
-                              description: tool.details?.description || "",
-                              endpoint: "http://localhost:8000/messages/",
-                              transport: "sse"
+                              mcpServers: {
+                                "mcp-cloud-tools": {
+                                  url: "https://mcpcloudtools.com/api/sse",
+                                  env: {}
+                                }
+                              }
                             }, null, 2)
                             setMcpConfig(config)
                             setActiveTab('usage')
